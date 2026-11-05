@@ -31,12 +31,19 @@
 
 <body>
     <h1>PROYECTOS</h1>
-    <button class="mi-boton">TOCAR</button>
+    <button id="mi-boton" class="miboton" >TOCAR</button>
     <h2>SMITH R.</h2>
     <p>aqui es donde van a ir la mayoría de mis proyectos de HTML5 JAVASCRIPT Y CSS y de pronto uno que otro proyecto en python</p>
     
 
 </body>
+    <script>
+         const boton = document.getElementById("mi-boton");
+        
+        boton.addEventListener("click", function() {
+            document.body.style.backgroundColor = "#2c3e50";
+        });
+    </script>
 </html>
 
 
