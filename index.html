@@ -39,9 +39,20 @@
 </body>
     <script>
          const boton = document.getElementById("mi-boton");
+        const colores = [
+            "#2c3e50", 
+            "#e74c3c", 
+            "#27ae60", 
+            "#f39c12", 
+            "#8e44ad", 
+            "#16a085"  
+        ];
         
+        let indiceActual = 0;
+
         boton.addEventListener("click", function() {
-            document.body.style.backgroundColor = "#2c3e50";
+            document.body.style.backgroundColor = colores[indiceActual];
+            indiceActual = (indiceActual + 1) % colores.length;
         });
     </script>
 </html>
