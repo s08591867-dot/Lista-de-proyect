@@ -181,7 +181,6 @@
       color: #ef4444;
     }
 
-    /* Modal Styling */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -320,8 +319,6 @@
       <div class="projects-grid" id="projectsContainer"></div>
     </main>
   </div>
-
-  <!-- Modal para Agregar Proyecto -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
       <h2>Nuevo Proyecto</h2>
@@ -357,8 +354,7 @@
     const fileNameDisplay = document.getElementById('fileNameDisplay');
 
     let projects = JSON.parse(localStorage.getItem('smith_projects')) || [];
-
-    // Abrir y Cerrar Modal
+    
     openModalBtn.addEventListener('click', () => modalOverlay.classList.add('active'));
     closeModalBtn.addEventListener('click', closeModal);
     modalOverlay.addEventListener('click', (e) => {
@@ -370,23 +366,20 @@
       projectForm.reset();
       fileNameDisplay.textContent = '';
     }
-
-    // Mostrar cantidad de archivos seleccionados
+    
     projectFilesInput.addEventListener('change', () => {
       const count = projectFilesInput.files.length;
       fileNameDisplay.textContent = count > 0 ? `${count} archivo(s) seleccionado(s)` : '';
     });
-
-    // Guardar Proyecto
+    
     projectForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const title = document.getElementById('projectTitle').value;
       const description = document.getElementById('projectDescription').value;
       const files = projectFilesInput.files;
-
+    
       const processedFiles = [];
-
       for (let file of files) {
         const base64 = await convertBase64(file);
         processedFiles.push({
@@ -395,20 +388,16 @@
           data: base64
         });
       }
-
       const newProject = {
         id: Date.now(),
         title,
         description,
         files: processedFiles
       };
-
       projects.push(newProject);
       saveAndRender();
       closeModal();
     });
-
-    // Convertir archivo a Base64 para guardarlo en LocalStorage
     function convertBase64(file) {
       return new Promise((resolve, reject) => {
         const fileReader = new FileReader();
@@ -417,19 +406,15 @@
         fileReader.onerror = (error) => reject(error);
       });
     }
-
-    // Eliminar Proyecto
+    
     function deleteProject(id) {
       projects = projects.filter(p => p.id !== id);
       saveAndRender();
     }
-
     function saveAndRender() {
       localStorage.setItem('smith_projects', JSON.stringify(projects));
       renderProjects();
-    }
-
-    // Renderizar Proyectos
+    }    
     function renderProjects() {
       projectsContainer.innerHTML = '';
 
@@ -441,11 +426,9 @@
         `;
         return;
       }
-
       projects.forEach(project => {
         const card = document.createElement('div');
         card.className = 'project-card';
-
         let filesHTML = '';
         if (project.files && project.files.length > 0) {
           filesHTML = '<div class="attachments-preview">';
@@ -458,19 +441,15 @@
           });
           filesHTML += '</div>';
         }
-
         card.innerHTML = `
           <button class="btn-delete" onclick="deleteProject(${project.id})">&times;</button>
           <h3>${project.title}</h3>
           <p>${project.description}</p>
           ${filesHTML}
         `;
-
         projectsContainer.appendChild(card);
       });
     }
-
-    // Inicializar
     renderProjects();
   </script>
 </body>
