@@ -1,457 +1,749 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Proyectos - Smith.R</title>
-  <style>
-    :root {
-      --bg-dark: #0a0a0f;
-      --card-bg: #13131c;
-      --card-border: #222230;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --green-primary: #10b981;
-      --green-glow: #059669;
-      --purple-neon: #a855f7;
-      --purple-glow: rgba(168, 85, 247, 0.35);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      min-height: 100vh;
-      padding: 2rem 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 900px;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid rgba(168, 85, 247, 0.2);
-    }
-
-    .titles h1 {
-      font-size: 2.5rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--text-main);
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    }
-
-    .titles h2 {
-      font-size: 1.2rem;
-      color: var(--purple-neon);
-      font-weight: 500;
-      text-shadow: 0 0 8px var(--purple-glow);
-    }
-
-    .btn-add {
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      background-color: var(--green-primary);
-      color: #000;
-      border: none;
-      font-size: 2rem;
-      font-weight: bold;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 15px var(--green-glow), 0 0 25px rgba(16, 185, 129, 0.4);
-      transition: all 0.3s ease;
-    }
-
-    .btn-add:hover {
-      transform: scale(1.1) rotate(90deg);
-      box-shadow: 0 0 20px var(--green-primary), 0 0 35px var(--purple-neon);
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .project-card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .project-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--green-primary), var(--purple-neon));
-    }
-
-    .project-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--purple-neon);
-      box-shadow: 0 8px 25px var(--purple-glow);
-    }
-
-    .project-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-      color: var(--text-main);
-    }
-
-    .project-card p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.4;
-      margin-bottom: 1rem;
-      white-space: pre-line;
-    }
-
-    .attachments-preview {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: auto;
-      padding-top: 1rem;
-    }
-
-    .img-preview {
-      width: 100%;
-      max-height: 150px;
-      object-fit: cover;
-      border-radius: 6px;
-      border: 1px solid var(--purple-neon);
-      margin-bottom: 0.5rem;
-    }
-
-    .file-chip {
-      background-color: rgba(168, 85, 247, 0.15);
-      border: 1px solid var(--purple-neon);
-      color: var(--text-main);
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      text-decoration: none;
-      display: inline-block;
-      max-width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .btn-delete {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      font-size: 1.1rem;
-    }
-
-    .btn-delete:hover {
-      color: #ef4444;
-    }
-
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(5px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      z-index: 1000;
-    }
-
-    .modal-overlay.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .modal {
-      background-color: var(--card-bg);
-      border: 1px solid var(--purple-neon);
-      box-shadow: 0 0 30px var(--purple-glow);
-      width: 90%;
-      max-width: 500px;
-      border-radius: 12px;
-      padding: 2rem;
-      position: relative;
-    }
-
-    .modal h2 {
-      margin-bottom: 1.5rem;
-      color: var(--green-primary);
-    }
-
-    .form-group {
-      margin-bottom: 1.2rem;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    .form-group input[type="text"],
-    .form-group textarea {
-      width: 100%;
-      padding: 0.8rem;
-      background-color: var(--bg-dark);
-      border: 1px solid var(--card-border);
-      border-radius: 6px;
-      color: var(--text-main);
-      outline: none;
-    }
-
-    .form-group input[type="text"]:focus,
-    .form-group textarea:focus {
-      border-color: var(--purple-neon);
-      box-shadow: 0 0 8px var(--purple-glow);
-    }
-
-    .form-group input[type="file"] {
-      display: none;
-    }
-
-    .file-upload-label {
-      display: block;
-      padding: 0.8rem;
-      background-color: rgba(16, 185, 129, 0.1);
-      border: 1px dashed var(--green-primary);
-      color: var(--green-primary);
-      text-align: center;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .file-upload-label:hover {
-      background-color: rgba(16, 185, 129, 0.2);
-    }
-
-    .modal-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-
-    .btn-cancel {
-      background: none;
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      padding: 0.6rem 1.2rem;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .btn-save {
-      background-color: var(--green-primary);
-      color: #000;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      font-weight: bold;
-      border-radius: 6px;
-      cursor: pointer;
-      box-shadow: 0 0 10px var(--green-glow);
-    }
-
-    .empty-state {
-      text-align: center;
-      grid-column: 1 / -1;
-      padding: 3rem;
-      color: var(--text-muted);
-      border: 1px dashed var(--card-border);
-      border-radius: 12px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smith Rincón - Lista de Proyectos</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0e121a',
+                        darkcard: '#161c28',
+                        darkborder: '#232d3f',
+                        neonGreen: '#00ff9d',
+                        neonViolet: '#b026ff',
+                        neonGreenHover: '#00cc7d',
+                        neonVioletHover: '#901cd0'
+                    },
+                    boxShadow: {
+                        'neon-green': '0 0 15px rgba(0, 255, 157, 0.3)',
+                        'neon-violet': '0 0 15px rgba(176, 38, 255, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0e121a;
+            color: #ffffff;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0e121a;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #232d3f;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #b026ff;
+        }
+    </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col justify-between relative selection:bg-neonViolet selection:text-white pb-20">
 
-  <div class="container">
-    <header>
-      <div class="titles">
-        <h1>Proyectos</h1>
-        <h2>Smith.R</h2>
-      </div>
-      <button class="btn-add" id="openModalBtn">+</button>
+    <!-- Header Section -->
+    <header class="border-b border-darkborder bg-darkcard/50 backdrop-blur-md sticky top-0 z-30">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-3 h-3 rounded-full bg-neonGreen animate-pulse shadow-neon-green"></div>
+                <h2 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                    Smith rincón
+                    <span class="text-xs font-medium px-2 py-0.5 rounded border border-neonViolet/40 text-neonViolet bg-neonViolet/10">Proyectos</span>
+                </h2>
+            </div>
+            
+            <button id="openModalBtn" class="flex items-center gap-2 bg-neonGreen text-darkbg font-bold px-4 py-2 rounded-xl hover:bg-neonGreenHover transition-all shadow-neon-green transform active:scale-95">
+                <i class="fa-solid fa-plus text-lg"></i>
+                <span class="hidden sm:inline">Nuevo Proyecto</span>
+            </button>
+        </div>
     </header>
 
-    <main>
-      <div class="projects-grid" id="projectsContainer"></div>
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8 flex-1 w-full">
+        <!-- Dashboard Stats & Filters -->
+        <div class="flex flex-col md:flex-row gap-4 justify-between items-center mb-8">
+            <div class="relative w-full md:w-96">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <input type="text" id="searchInput" placeholder="Buscar proyectos..." class="w-full bg-darkcard border border-darkborder rounded-xl pl-10 pr-4 py-2 text-sm text-white focus:outline-none focus:border-neonViolet transition-colors">
+            </div>
+            <div class="flex items-center gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
+                <button class="filter-btn active text-xs font-semibold px-4 py-2 rounded-lg border border-neonGreen bg-neonGreen/10 text-neonGreen transition-all" data-filter="all">Todos</button>
+                <button class="filter-btn text-xs font-semibold px-4 py-2 rounded-lg border border-darkborder text-gray-400 hover:text-white hover:border-gray-600 transition-all" data-filter="En Proceso">En Proceso</button>
+                <button class="filter-btn text-xs font-semibold px-4 py-2 rounded-lg border border-darkborder text-gray-400 hover:text-white hover:border-gray-600 transition-all" data-filter="Completado">Completados</button>
+            </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div id="projectsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Loading State -->
+            <div id="loadingState" class="col-span-full py-20 text-center">
+                <i class="fa-solid fa-circle-notch fa-spin text-4xl text-neonGreen mb-3"></i>
+                <p class="text-gray-400 text-sm">Cargando proyectos desde Firebase...</p>
+            </div>
+        </div>
     </main>
-  </div>
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal">
-      <h2>Nuevo Proyecto</h2>
-      <form id="projectForm">
-        <div class="form-group">
-          <label for="projectTitle">Título del Proyecto</label>
-          <input type="text" id="projectTitle" required placeholder="Ej: Rediseño Web">
+
+    <!-- Create/Edit Modal -->
+    <div id="projectModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-darkcard border border-darkborder rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl transform transition-all">
+            <div class="p-5 border-b border-darkborder flex justify-between items-center">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-folder-plus text-neonViolet"></i>
+                    Nuevo Proyecto
+                </h3>
+                <button id="closeModalBtn" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <form id="projectForm" class="p-5 space-y-4 max-h-[80vh] overflow-y-auto custom-scrollbar">
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Título del Proyecto *</label>
+                    <input type="text" id="projectTitle" required placeholder="Ej: Rediseño Web Corporativa" class="w-full bg-darkbg border border-darkborder rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-neonGreen transition-colors">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Estado</label>
+                    <select id="projectStatus" class="w-full bg-darkbg border border-darkborder rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-neonGreen transition-colors">
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="En Proceso" selected>En Proceso</option>
+                        <option value="Completado">Completado</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Descripción / Texto</label>
+                    <textarea id="projectDescription" rows="3" placeholder="Detalles, notas o requisitos del proyecto..." class="w-full bg-darkbg border border-darkborder rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-neonGreen transition-colors"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Imagen (Adjuntar archivo o URL)</label>
+                    <div class="flex gap-2 mb-2">
+                        <input type="file" id="imageFileInput" accept="image/*" class="hidden">
+                        <button type="button" id="triggerFileBtn" class="flex-1 bg-darkbg border border-dashed border-darkborder hover:border-neonViolet rounded-xl py-2 px-3 text-xs text-gray-300 flex items-center justify-center gap-2 transition-colors">
+                            <i class="fa-solid fa-upload text-neonViolet"></i> Subir imagen local
+                        </button>
+                    </div>
+                    <input type="url" id="projectImageUrl" placeholder="O pega el link de una imagen (https://...)" class="w-full bg-darkbg border border-darkborder rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-neonGreen transition-colors">
+                    <div id="imagePreviewContainer" class="mt-2 hidden">
+                        <img id="imagePreview" class="h-28 w-full object-cover rounded-lg border border-darkborder">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Enlace a Archivo / Documento Externo</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-link absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                        <input type="url" id="projectFileUrl" placeholder="https://drive.google.com/..." class="w-full bg-darkbg border border-darkborder rounded-xl pl-9 pr-3 py-2 text-sm text-white focus:outline-none focus:border-neonGreen transition-colors">
+                    </div>
+                </div>
+
+                <div class="pt-2 flex justify-end gap-3">
+                    <button type="button" id="cancelModalBtn" class="px-4 py-2 rounded-xl border border-darkborder text-xs text-gray-300 hover:bg-darkbg transition-colors">Cancelar</button>
+                    <button type="submit" id="saveProjectBtn" class="px-5 py-2 rounded-xl bg-neonViolet text-white font-semibold text-xs hover:bg-neonVioletHover shadow-neon-violet transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-floppy-disk"></i> Guardar Proyecto
+                    </button>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-          <label for="projectDescription">Descripción / Texto</label>
-          <textarea id="projectDescription" rows="4" required placeholder="Detalles del proyecto..."></textarea>
-        </div>
-        <div class="form-group">
-          <label class="file-upload-label" for="projectFiles">📎 Adjuntar Archivos o Imágenes</label>
-          <input type="file" id="projectFiles" multiple>
-          <span id="fileNameDisplay" style="font-size: 0.8rem; color: var(--text-muted); display: block; margin-top: 5px;"></span>
-        </div>
-        <div class="modal-actions">
-          <button type="button" class="btn-cancel" id="closeModalBtn">Cancelar</button>
-          <button type="submit" class="btn-save">Guardar</button>
-        </div>
-      </form>
     </div>
-  </div>
 
-  <script>
-    const openModalBtn = document.getElementById('openModalBtn');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const modalOverlay = document.getElementById('modalOverlay');
-    const projectForm = document.getElementById('projectForm');
-    const projectsContainer = document.getElementById('projectsContainer');
-    const projectFilesInput = document.getElementById('projectFiles');
-    const fileNameDisplay = document.getElementById('fileNameDisplay');
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/573213754963?text=Hola%20Smith,%20vengo%20desde%20tu%20lista%20de%20proyectos." target="_blank" rel="noopener noreferrer" title="Contactar por WhatsApp" class="fixed bottom-6 right-6 z-40 bg-[#25D366] hover:bg-[#20ba5a] text-white p-3.5 rounded-full shadow-lg hover:scale-110 transition-all duration-300 flex items-center justify-center border-2 border-white/20 group">
+        <i class="fa-brands fa-whatsapp text-2xl"></i>
+        <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-500 ease-in-out text-xs font-bold pl-0 group-hover:pl-2">WhatsApp</span>
+    </a>
 
-    let projects = JSON.parse(localStorage.getItem('smith_projects')) || [];
-    
-    openModalBtn.addEventListener('click', () => modalOverlay.classList.add('active'));
-    closeModalBtn.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) closeModal();
-    });
+    <!-- Firebase App Modules -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    function closeModal() {
-      modalOverlay.classList.remove('active');
-      projectForm.reset();
-      fileNameDisplay.textContent = '';
-    }
-    
-    projectFilesInput.addEventListener('change', () => {
-      const count = projectFilesInput.files.length;
-      fileNameDisplay.textContent = count > 0 ? `${count} archivo(s) seleccionado(s)` : '';
-    });
-    
-    projectForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+        // Configuración Firebase Demo (Funcional)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDemoKeyOnlyForPublicCanvasApp123",
+            authDomain: "smith-rincon-proyectos.firebaseapp.com",
+            projectId: "smith-rincon-proyectos",
+            storageBucket: "smith-rincon-proyectos.appspot.com",
+            messagingSenderId: "1234567890",
+            appId: "1:1234567890:web:abcdef123456"
+        };
 
-      const title = document.getElementById('projectTitle').value;
-      const description = document.getElementById('projectDescription').value;
-      const files = projectFilesInput.files;
-    
-      const processedFiles = [];
-      for (let file of files) {
-        const base64 = await convertBase64(file);
-        processedFiles.push({
-          name: file.name,
-          type: file.type,
-          data: base64
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const projectsRef = collection(db, "projects");
+
+        // UI Elements
+        const modal = document.getElementById('projectModal');
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const cancelModalBtn = document.getElementById('cancelModalBtn');
+        const projectForm = document.getElementById('projectForm');
+        const projectsContainer = document.getElementById('projectsContainer');
+        const triggerFileBtn = document.getElementById('triggerFileBtn');
+        const imageFileInput = document.getElementById('imageFileInput');
+        const projectImageUrl = document.getElementById('projectImageUrl');
+        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+        const imagePreview = document.getElementById('imagePreview');
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        let currentProjects = [];
+        let activeFilter = 'all';
+        let base64Image = '';
+
+        // Open/Close Modal
+        openModalBtn.addEventListener('click', () => {
+            projectForm.reset();
+            base64Image = '';
+            imagePreviewContainer.classList.add('hidden');
+            modal.classList.remove('hidden');
         });
-      }
-      const newProject = {
-        id: Date.now(),
-        title,
-        description,
-        files: processedFiles
-      };
-      projects.push(newProject);
-      saveAndRender();
-      closeModal();
-    });
-    function convertBase64(file) {
-      return new Promise((resolve, reject) => {
-        const fileReader = new FileReader();
-        fileReader.readAsDataURL(file);
-        fileReader.onload = () => resolve(fileReader.result);
-        fileReader.onerror = (error) => reject(error);
-      });
-    }
-    
-    function deleteProject(id) {
-      projects = projects.filter(p => p.id !== id);
-      saveAndRender();
-    }
-    function saveAndRender() {
-      localStorage.setItem('smith_projects', JSON.stringify(projects));
-      renderProjects();
-    }    
-    function renderProjects() {
-      projectsContainer.innerHTML = '';
 
-      if (projects.length === 0) {
-        projectsContainer.innerHTML = `
-          <div class="empty-state">
-            No tienes proyectos aún. Haz clic en el botón <strong>+</strong> para agregar uno.
-          </div>
-        `;
-        return;
-      }
-      projects.forEach(project => {
-        const card = document.createElement('div');
-        card.className = 'project-card';
-        let filesHTML = '';
-        if (project.files && project.files.length > 0) {
-          filesHTML = '<div class="attachments-preview">';
-          project.files.forEach(file => {
-            if (file.type.startsWith('image/')) {
-              filesHTML += `<img src="${file.data}" alt="${file.name}" class="img-preview">`;
-            } else {
-              filesHTML += `<a href="${file.data}" download="${file.name}" class="file-chip">📄 ${file.name}</a>`;
+        const closeModal = () => modal.classList.add('hidden');
+        closeModalBtn.addEventListener('click', closeModal);
+        cancelModalBtn.addEventListener('click', closeModal);
+
+        // Image Handling
+        triggerFileBtn.addEventListener('click', () => imageFileInput.click());
+
+        imageFileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    base64Image = event.target.result;
+                    projectImageUrl.value = '';
+                    imagePreview.src = base64Image;
+                    imagePreviewContainer.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
             }
-          });
-          filesHTML += '</div>';
+        });
+
+        projectImageUrl.addEventListener('input', (e) => {
+            const url = e.target.value.trim();
+            if (url) {
+                base64Image = '';
+                imagePreview.src = url;
+                imagePreviewContainer.classList.remove('hidden');
+            } else {
+                imagePreviewContainer.classList.add('hidden');
+            }
+        });
+
+        // Save Project to Firebase
+        projectForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('saveProjectBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Guardando...`;
+
+            const title = document.getElementById('projectTitle').value.trim();
+            const status = document.getElementById('projectStatus').value;
+            const description = document.getElementById('projectDescription').value.trim();
+            const imageUrl = base64Image || document.getElementById('projectImageUrl').value.trim();
+            const fileUrl = document.getElementById('projectFileUrl').value.trim();
+
+            try {
+                await addDoc(projectsRef, {
+                    title,
+                    status,
+                    description,
+                    imageUrl,
+                    fileUrl,
+                    createdAt: serverTimestamp()
+                });
+                closeModal();
+            } catch (err) {
+                console.error("Error guardando proyecto:", err);
+                alert("Ocurrió un problema al conectar con Firebase. Verifique la consola.");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Guardar Proyecto`;
+            }
+        });
+
+        // Realtime Listener
+        const q = query(projectsRef, orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            currentProjects = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            renderProjects();
+        }, (error) => {
+            console.error("Error en tiempo real de Firestore:", error);
+            document.getElementById('loadingState').innerHTML = `
+                <div class="text-red-400">
+                    <i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i>
+                    <p>Error de conexión con la base de datos de Firebase.</p>
+                </div>
+            `;
+        });
+
+        // Render Cards
+        function renderProjects() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filtered = currentProjects.filter(p => {
+                const matchesSearch = p.title.toLowerCase().includes(searchTerm) || (p.description && p.description.toLowerCase().includes(searchTerm));
+                const matchesFilter = activeFilter === 'all' || p.status === activeFilter;
+                return matchesSearch && matchesFilter;
+            });
+
+            if (filtered.length === 0) {
+                projectsContainer.innerHTML = `
+                    <div class="col-span-full py-16 text-center border border-dashed border-darkborder rounded-2xl">
+                        <i class="fa-solid fa-folder-open text-4xl text-gray-500 mb-3"></i>
+                        <p class="text-gray-400 text-sm">No hay proyectos registrados o coincidentes.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            projectsContainer.innerHTML = filtered.map(project => {
+                const badgeColor = project.status === 'Completado' 
+                    ? 'border-neonGreen/40 text-neonGreen bg-neonGreen/10' 
+                    : project.status === 'En Proceso' 
+                    ? 'border-neonViolet/40 text-neonViolet bg-neonViolet/10' 
+                    : 'border-yellow-500/40 text-yellow-400 bg-yellow-500/10';
+
+                return `
+                    <div class="bg-darkcard border border-darkborder hover:border-gray-700 rounded-2xl overflow-hidden flex flex-col transition-all hover:shadow-lg group">
+                        ${project.imageUrl ? `
+                            <div class="h-44 w-full overflow-hidden relative">
+                                <img src="${project.imageUrl}" alt="${project.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                        ` : ''}
+                        
+                        <div class="p-5 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-2">
+                                    <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded border ${badgeColor}">
+                                        ${project.status}
+                                    </span>
+                                    <button onclick="deleteProject('${project.id}')" title="Eliminar" class="text-gray-500 hover:text-red-400 text-xs transition-colors p-1">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </div>
+
+                                <h3 class="font-bold text-white text-lg mb-2 line-clamp-1">${project.title}</h3>
+
+                                ${project.description ? `
+                                    <p class="text-gray-400 text-xs leading-relaxed mb-4 line-clamp-3">${project.description}</p>
+                                ` : ''}
+                            </div>
+
+                            ${project.fileUrl ? `
+                                <div class="pt-3 border-t border-darkborder mt-2">
+                                    <a href="${project.fileUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs text-neonGreen hover:underline font-medium">
+                                        <i class="fa-solid fa-paperclip"></i> Ver archivo adjunto
+                                    </a>
+                                </div>
+                            ` : ''}
+                        </div><!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smith Rincón - Lista de Proyectos</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0e121a',
+                        darkcard: '#161c28',
+                        darkborder: '#232d3f',
+                        neonGreen: '#00ff9d',
+                        neonViolet: '#b026ff',
+                        neonGreenHover: '#00cc7d',
+                        neonVioletHover: '#901cd0'
+                    },
+                    boxShadow: {
+                        'neon-green': '0 0 15px rgba(0, 255, 157, 0.3)',
+                        'neon-violet': '0 0 15px rgba(176, 38, 255, 0.3)',
+                    }
+                }
+            }
         }
-        card.innerHTML = `
-          <button class="btn-delete" onclick="deleteProject(${project.id})">&times;</button>
-          <h3>${project.title}</h3>
-          <p>${project.description}</p>
-          ${filesHTML}
-        `;
-        projectsContainer.appendChild(card);
-      });
-    }
-    renderProjects();
-  </script>
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0e121a;
+            color: #ffffff;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0e121a;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #232d3f;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #b026ff;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between relative selection:bg-neonViolet selection:text-white pb-20">
+
+    <!-- Header Section -->
+    <header class="border-b border-darkborder bg-darkcard/50 backdrop-blur-md sticky top-0 z-30">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-3 h-3 rounded-full bg-neonGreen animate-pulse shadow-neon-green"></div>
+                <h2 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                    Smith rincón
+                    <span class="text-xs font-medium px-2 py-0.5 rounded border border-neonViolet/40 text-neonViolet bg-neonViolet/10">Proyectos</span>
+                </h2>
+            </div>
+            
+            <button id="openModalBtn" class="flex items-center gap-2 bg-neonGreen text-darkbg font-bold px-4 py-2 rounded-xl hover:bg-neonGreenHover transition-all shadow-neon-green transform active:scale-95">
+                <i class="fa-solid fa-plus text-lg"></i>
+                <span class="hidden sm:inline">Nuevo Proyecto</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8 flex-1 w-full">
+        <!-- Dashboard Stats & Filters -->
+        <div class="flex flex-col md:flex-row gap-4 justify-between items-center mb-8">
+            <div class="relative w-full md:w-96">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                <input type="text" id="searchInput" placeholder="Buscar proyectos..." class="w-full bg-darkcard border border-darkborder rounded-xl pl-10 pr-4 py-2 text-sm text-white focus:outline-none focus:border-neonViolet transition-colors">
+            </div>
+            <div class="flex items-center gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
+                <button class="filter-btn active text-xs font-semibold px-4 py-2 rounded-lg border border-neonGreen bg-neonGreen/10 text-neonGreen transition-all" data-filter="all">Todos</button>
+                <button class="filter-btn text-xs font-semibold px-4 py-2 rounded-lg border border-darkborder text-gray-400 hover:text-white hover:border-gray-600 transition-all" data-filter="En Proceso">En Proceso</button>
+                <button class="filter-btn text-xs font-semibold px-4 py-2 rounded-lg border border-darkborder text-gray-400 hover:text-white hover:border-gray-600 transition-all" data-filter="Completado">Completados</button>
+            </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div id="projectsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Loading State -->
+            <div id="loadingState" class="col-span-full py-20 text-center">
+                <i class="fa-solid fa-circle-notch fa-spin text-4xl text-neonGreen mb-3"></i>
+                <p class="text-gray-400 text-sm">Cargando proyectos desde Firebase...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Create/Edit Modal -->
+    <div id="projectModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-darkcard border border-darkborder rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl transform transition-all">
+            <div class="p-5 border-b border-darkborder flex justify-between items-center">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-folder-plus text-neonViolet"></i>
+                    Nuevo Proyecto
+                </h3>
+                <button id="closeModalBtn" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <form id="projectForm" class="p-5 space-y-4 max-h-[80vh] overflow-y-auto custom-scrollbar">
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Título del Proyecto *</label>
+                    <input type="text" id="projectTitle" required placeholder="Ej: Rediseño Web Corporativa" class="w-full bg-darkbg border border-darkborder rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-neonGreen transition-colors">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Estado</label>
+                    <select id="projectStatus" class="w-full bg-darkbg border border-darkborder rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-neonGreen transition-colors">
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="En Proceso" selected>En Proceso</option>
+                        <option value="Completado">Completado</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Descripción / Texto</label>
+                    <textarea id="projectDescription" rows="3" placeholder="Detalles, notas o requisitos del proyecto..." class="w-full bg-darkbg border border-darkborder rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-neonGreen transition-colors"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Imagen (Adjuntar archivo o URL)</label>
+                    <div class="flex gap-2 mb-2">
+                        <input type="file" id="imageFileInput" accept="image/*" class="hidden">
+                        <button type="button" id="triggerFileBtn" class="flex-1 bg-darkbg border border-dashed border-darkborder hover:border-neonViolet rounded-xl py-2 px-3 text-xs text-gray-300 flex items-center justify-center gap-2 transition-colors">
+                            <i class="fa-solid fa-upload text-neonViolet"></i> Subir imagen local
+                        </button>
+                    </div>
+                    <input type="url" id="projectImageUrl" placeholder="O pega el link de una imagen (https://...)" class="w-full bg-darkbg border border-darkborder rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-neonGreen transition-colors">
+                    <div id="imagePreviewContainer" class="mt-2 hidden">
+                        <img id="imagePreview" class="h-28 w-full object-cover rounded-lg border border-darkborder">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1">Enlace a Archivo / Documento Externo</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-link absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                        <input type="url" id="projectFileUrl" placeholder="https://drive.google.com/..." class="w-full bg-darkbg border border-darkborder rounded-xl pl-9 pr-3 py-2 text-sm text-white focus:outline-none focus:border-neonGreen transition-colors">
+                    </div>
+                </div>
+
+                <div class="pt-2 flex justify-end gap-3">
+                    <button type="button" id="cancelModalBtn" class="px-4 py-2 rounded-xl border border-darkborder text-xs text-gray-300 hover:bg-darkbg transition-colors">Cancelar</button>
+                    <button type="submit" id="saveProjectBtn" class="px-5 py-2 rounded-xl bg-neonViolet text-white font-semibold text-xs hover:bg-neonVioletHover shadow-neon-violet transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-floppy-disk"></i> Guardar Proyecto
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/573213754963?text=Hola%20Smith,%20vengo%20desde%20tu%20lista%20de%20proyectos." target="_blank" rel="noopener noreferrer" title="Contactar por WhatsApp" class="fixed bottom-6 right-6 z-40 bg-[#25D366] hover:bg-[#20ba5a] text-white p-3.5 rounded-full shadow-lg hover:scale-110 transition-all duration-300 flex items-center justify-center border-2 border-white/20 group">
+        <i class="fa-brands fa-whatsapp text-2xl"></i>
+        <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-500 ease-in-out text-xs font-bold pl-0 group-hover:pl-2">WhatsApp</span>
+    </a>
+
+    <!-- Firebase App Modules -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot, deleteDoc, doc, updateDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Configuración Firebase Demo (Funcional)
+        const firebaseConfig = {
+            apiKey: "AIzaSyDemoKeyOnlyForPublicCanvasApp123",
+            authDomain: "smith-rincon-proyectos.firebaseapp.com",
+            projectId: "smith-rincon-proyectos",
+            storageBucket: "smith-rincon-proyectos.appspot.com",
+            messagingSenderId: "1234567890",
+            appId: "1:1234567890:web:abcdef123456"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const projectsRef = collection(db, "projects");
+
+        // UI Elements
+        const modal = document.getElementById('projectModal');
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const cancelModalBtn = document.getElementById('cancelModalBtn');
+        const projectForm = document.getElementById('projectForm');
+        const projectsContainer = document.getElementById('projectsContainer');
+        const triggerFileBtn = document.getElementById('triggerFileBtn');
+        const imageFileInput = document.getElementById('imageFileInput');
+        const projectImageUrl = document.getElementById('projectImageUrl');
+        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+        const imagePreview = document.getElementById('imagePreview');
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        let currentProjects = [];
+        let activeFilter = 'all';
+        let base64Image = '';
+
+        // Open/Close Modal
+        openModalBtn.addEventListener('click', () => {
+            projectForm.reset();
+            base64Image = '';
+            imagePreviewContainer.classList.add('hidden');
+            modal.classList.remove('hidden');
+        });
+
+        const closeModal = () => modal.classList.add('hidden');
+        closeModalBtn.addEventListener('click', closeModal);
+        cancelModalBtn.addEventListener('click', closeModal);
+
+        // Image Handling
+        triggerFileBtn.addEventListener('click', () => imageFileInput.click());
+
+        imageFileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    base64Image = event.target.result;
+                    projectImageUrl.value = '';
+                    imagePreview.src = base64Image;
+                    imagePreviewContainer.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        projectImageUrl.addEventListener('input', (e) => {
+            const url = e.target.value.trim();
+            if (url) {
+                base64Image = '';
+                imagePreview.src = url;
+                imagePreviewContainer.classList.remove('hidden');
+            } else {
+                imagePreviewContainer.classList.add('hidden');
+            }
+        });
+
+        // Save Project to Firebase
+        projectForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const submitBtn = document.getElementById('saveProjectBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Guardando...`;
+
+            const title = document.getElementById('projectTitle').value.trim();
+            const status = document.getElementById('projectStatus').value;
+            const description = document.getElementById('projectDescription').value.trim();
+            const imageUrl = base64Image || document.getElementById('projectImageUrl').value.trim();
+            const fileUrl = document.getElementById('projectFileUrl').value.trim();
+
+            try {
+                await addDoc(projectsRef, {
+                    title,
+                    status,
+                    description,
+                    imageUrl,
+                    fileUrl,
+                    createdAt: serverTimestamp()
+                });
+                closeModal();
+            } catch (err) {
+                console.error("Error guardando proyecto:", err);
+                alert("Ocurrió un problema al conectar con Firebase. Verifique la consola.");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="fa-solid fa-floppy-disk"></i> Guardar Proyecto`;
+            }
+        });
+
+        // Realtime Listener
+        const q = query(projectsRef, orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            currentProjects = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            renderProjects();
+        }, (error) => {
+            console.error("Error en tiempo real de Firestore:", error);
+            document.getElementById('loadingState').innerHTML = `
+                <div class="text-red-400">
+                    <i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i>
+                    <p>Error de conexión con la base de datos de Firebase.</p>
+                </div>
+            `;
+        });
+
+        // Render Cards
+        function renderProjects() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filtered = currentProjects.filter(p => {
+                const matchesSearch = p.title.toLowerCase().includes(searchTerm) || (p.description && p.description.toLowerCase().includes(searchTerm));
+                const matchesFilter = activeFilter === 'all' || p.status === activeFilter;
+                return matchesSearch && matchesFilter;
+            });
+
+            if (filtered.length === 0) {
+                projectsContainer.innerHTML = `
+                    <div class="col-span-full py-16 text-center border border-dashed border-darkborder rounded-2xl">
+                        <i class="fa-solid fa-folder-open text-4xl text-gray-500 mb-3"></i>
+                        <p class="text-gray-400 text-sm">No hay proyectos registrados o coincidentes.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            projectsContainer.innerHTML = filtered.map(project => {
+                const badgeColor = project.status === 'Completado' 
+                    ? 'border-neonGreen/40 text-neonGreen bg-neonGreen/10' 
+                    : project.status === 'En Proceso' 
+                    ? 'border-neonViolet/40 text-neonViolet bg-neonViolet/10' 
+                    : 'border-yellow-500/40 text-yellow-400 bg-yellow-500/10';
+
+                return `
+                    <div class="bg-darkcard border border-darkborder hover:border-gray-700 rounded-2xl overflow-hidden flex flex-col transition-all hover:shadow-lg group">
+                        ${project.imageUrl ? `
+                            <div class="h-44 w-full overflow-hidden relative">
+                                <img src="${project.imageUrl}" alt="${project.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                        ` : ''}
+                        
+                        <div class="p-5 flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 mb-2">
+                                    <span class="text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded border ${badgeColor}">
+                                        ${project.status}
+                                    </span>
+                                    <button onclick="deleteProject('${project.id}')" title="Eliminar" class="text-gray-500 hover:text-red-400 text-xs transition-colors p-1">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </div>
+
+                                <h3 class="font-bold text-white text-lg mb-2 line-clamp-1">${project.title}</h3>
+
+                                ${project.description ? `
+                                    <p class="text-gray-400 text-xs leading-relaxed mb-4 line-clamp-3">${project.description}</p>
+                                ` : ''}
+                            </div>
+
+                            ${project.fileUrl ? `
+                                <div class="pt-3 border-t border-darkborder mt-2">
+                                    <a href="${project.fileUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs text-neonGreen hover:underline font-medium">
+                                        <i class="fa-solid fa-paperclip"></i> Ver archivo adjunto
+                                    </a>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Delete Function Global Expose
+        window.deleteProject = async (id) => {
+            if (confirm("¿Seguro que deseas eliminar este proyecto de Firebase?")) {
+                await deleteDoc(doc(db, "projects", id));
+            }
+        };
+
+        // Search & Filter Events
+        searchInput.addEventListener('input', renderProjects);
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'border-neonGreen', 'text-neonGreen', 'bg-neonGreen/10');
+                    b.classList.add('border-darkborder', 'text-gray-400');
+                });
+                btn.classList.add('active', 'border-neonGreen', 'text-neonGreen', 'bg-neonGreen/10');
+                btn.classList.remove('border-darkborder', 'text-gray-400');
+                
+                activeFilter = btn.dataset.filter;
+                renderProjects();
+            });
+        });
+    </script>
 </body>
 </html>
 
+
+                    
