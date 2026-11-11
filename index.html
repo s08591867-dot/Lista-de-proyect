@@ -1,1 +1,1053 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portafolio & Galería Multimedia</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#0a0a0c',
+              card: '#121217',
+              gold: '#D4AF37',
+              goldHover: '#F3E5AB',
+              yellow: '#FFD700',
+              violet: '#A855F7',
+              neonViolet: '#C084FC',
+            }
+          },
+          boxShadow: {
+            'gold-glow': '0 0 15px rgba(212, 175, 55, 0.3)',
+            'violet-glow': '0 0 20px rgba(168, 85, 247, 0.5)',
+          }
+        }
+      }
+    }
+  </script>
 
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Google Fonts: Montserrat & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0a0a0c;
+      color: #f3f4f6;
+    }
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 8px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #121217;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #D4AF37;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-violet selection:text-white custom-scrollbar">
+
+  <!-- Header Navigation -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-brand-black/80 border-b border-brand-gold/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Logo / Title -->
+      <div class="flex items-center space-x-3">
+        <!-- Replaced Star with Cyber Cat Vector Logo -->
+        <div class="w-12 h-12 rounded-2xl bg-black border border-brand-violet/40 p-1 shadow-violet-glow flex items-center justify-center relative overflow-hidden group">
+          <div class="absolute inset-0 bg-brand-violet/10 group-hover:bg-brand-violet/20 transition-colors"></div>
+          <svg class="w-full h-full relative z-10" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="neon-glow-violet" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="2.5" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+            <!-- Cat Head Purple Neon Contour & Ears -->
+            <path d="M 22 45 C 18 25, 30 15, 38 20 C 44 23, 47 24, 50 24 C 53 24, 56 23, 62 20 C 70 15, 82 25, 78 45" 
+                  stroke="#C084FC" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#neon-glow-violet)"/>
+            
+            <!-- Left Brain Half (Organic Waves) -->
+            <g stroke="#C084FC" stroke-width="2" fill="none" stroke-linecap="round">
+              <path d="M 32 30 C 28 34, 28 40, 34 42 C 38 43, 42 41, 40 37 C 38 33, 34 30, 42 27 C 46 29, 48 35, 45 40 M 35 44 C 40 45, 46 44, 48 40" />
+            </g>
+
+            <!-- Right Brain Half (Digital Circuit & Chip) -->
+            <g stroke="#C084FC" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="58" y="31" width="10" height="10" rx="1.5" stroke="#C084FC" stroke-width="2" fill="#C084FC" fill-opacity="0.3"/>
+              <path d="M 50 26 H 68 M 63 26 V 31 M 68 36 H 75 M 63 41 V 46 M 52 40 H 58 M 52 46 H 68" />
+              <circle cx="73" cy="26" r="1" fill="#C084FC" />
+              <circle cx="75" cy="36" r="1" fill="#C084FC" />
+              <circle cx="52" cy="40" r="1" fill="#C084FC" />
+            </g>
+
+            <!-- Center Brain Divider Line -->
+            <line x1="50" y1="24" x2="50" y2="47" stroke="#C084FC" stroke-width="2" stroke-dasharray="2 2" />
+
+            <!-- Golden Cat Lower Face, Nose, Mouth & Whiskers -->
+            <g stroke="#D4AF37" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Cheek Fur Frame -->
+              <path d="M 20 44 C 15 54, 25 68, 33 78 C 42 86, 58 86, 67 78 C 75 68, 85 54, 80 44 C 74 46, 68 48, 64 45" />
+              <!-- Nose & Snout -->
+              <path d="M 46 58 L 54 58 L 50 64 Z" fill="#D4AF37" stroke="none" />
+              <path d="M 50 64 C 44 72, 38 68, 36 64 M 50 64 C 56 72, 62 68, 64 64" stroke-width="2.5" />
+              <!-- Whiskers Left -->
+              <path d="M 33 60 L 15 57 M 34 64 L 18 66 M 36 68 L 22 74" stroke-width="2" />
+              <!-- Whiskers Right -->
+              <path d="M 67 60 L 85 57 M 66 64 L 82 66 M 64 68 L 78 74" stroke-width="2" />
+            </g>
+          </svg>
+        </div>
+        <div>
+          <span class="text-xl font-extrabold tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-brand-gold via-brand-yellow to-white font-heading">
+            PORTAFOLIO
+          </span>
+          <span class="block text-[10px] tracking-widest text-brand-violet uppercase font-semibold">Exclusivo & Multimedia</span>
+        </div>
+      </div>
+
+      <!-- Navigation & Auth Button -->
+      <div class="flex items-center space-x-4">
+        <!-- Admin Status Indicator -->
+        <div id="admin-badge" class="hidden items-center space-x-2 px-3 py-1 rounded-full bg-brand-violet/20 border border-brand-violet/50 text-brand-neonViolet text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-brand-violet animate-pulse"></span>
+          <span>Modo Administrador</span>
+        </div>
+
+        <!-- Google User Profile Badge (Voter) -->
+        <div id="google-user-badge" class="hidden items-center space-x-2 bg-brand-card border border-brand-gold/30 px-3 py-1 rounded-full text-xs text-white">
+          <img id="google-user-avatar" class="w-5 h-5 rounded-full" src="" alt="Google User">
+          <span id="google-user-name" class="font-medium truncate max-w-[100px]">Usuario</span>
+          <button id="google-logout-btn" class="text-gray-400 hover:text-red-400 ml-1" title="Cerrar sesión de Google">
+            <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+
+        <!-- Admin Login/Logout Action Button -->
+        <button id="auth-btn" class="flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 border border-brand-gold/40 hover:border-brand-gold bg-brand-gold/10 text-brand-gold hover:bg-brand-gold hover:text-black">
+          <i data-lucide="lock" class="w-4 h-4"></i>
+          <span id="auth-btn-text">Admin Login</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero & Statistics Section -->
+  <section class="relative pt-12 pb-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+    <div class="text-center space-y-4 max-w-3xl mx-auto">
+      <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/30 text-brand-yellow text-xs font-medium uppercase tracking-widest">
+        <i data-lucide="briefcase" class="w-3.5 h-3.5"></i>
+        <span>Proyectos & Recursos</span>
+      </div>
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white font-heading">
+        Galería de <span class="bg-clip-text text-transparent bg-gradient-to-r from-brand-gold via-brand-yellow to-brand-neonViolet">Contenido Digital</span>
+      </h1>
+      <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
+        Explora la colección interactiva de imágenes, videos, documentos y recursos. 
+      </p>
+    </div>
+
+    <!-- Live Counter Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+      <!-- Projects Counter -->
+      <div class="bg-brand-card/80 border border-brand-gold/20 rounded-2xl p-6 relative overflow-hidden group hover:border-brand-gold/50 transition-all duration-300">
+        <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-brand-gold/10 rounded-full blur-xl group-hover:bg-brand-gold/20 transition-all"></div>
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Proyectos Publicados</p>
+            <h3 id="counter-projects" class="text-4xl font-extrabold text-brand-gold font-heading mt-1">0</h3>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center text-brand-gold">
+            <i data-lucide="folder-kanban" class="w-6 h-6"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rating Average Counter -->
+      <div class="bg-brand-card/80 border border-brand-gold/20 rounded-2xl p-6 relative overflow-hidden group hover:border-brand-gold/50 transition-all duration-300">
+        <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-brand-yellow/10 rounded-full blur-xl group-hover:bg-brand-yellow/20 transition-all"></div>
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Promedio de Calificación</p>
+            <div class="flex items-baseline space-x-2 mt-1">
+              <h3 id="counter-avg-rating" class="text-4xl font-extrabold text-brand-yellow font-heading">0.0</h3>
+              <span class="text-xs text-gray-400">/ 5.0</span>
+            </div>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-brand-yellow/10 border border-brand-yellow/30 flex items-center justify-center text-brand-yellow">
+            <i data-lucide="star" class="w-6 h-6 fill-brand-yellow"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Total Votes Counter -->
+      <div class="bg-brand-card/80 border border-brand-gold/20 rounded-2xl p-6 relative overflow-hidden group hover:border-brand-violet/50 transition-all duration-300">
+        <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-brand-violet/10 rounded-full blur-xl group-hover:bg-brand-violet/20 transition-all"></div>
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Total Opiniones</p>
+            <h3 id="counter-total-votes" class="text-4xl font-extrabold text-brand-neonViolet font-heading mt-1">0</h3>
+          </div>
+          <div class="w-12 h-12 rounded-xl bg-brand-violet/10 border border-brand-violet/30 flex items-center justify-center text-brand-neonViolet">
+            <i data-lucide="users" class="w-6 h-6"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Admin Controls Panel (Only visible when logged in as Admin) -->
+  <section id="admin-panel" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-6">
+    <div class="bg-gradient-to-r from-brand-card via-black to-brand-card border-2 border-brand-violet/60 rounded-3xl p-6 shadow-violet-glow relative">
+      <div class="flex items-center justify-between pb-4 border-b border-gray-800 mb-6">
+        <div class="flex items-center space-x-3">
+          <div class="w-8 h-8 rounded-lg bg-brand-violet flex items-center justify-center text-black font-bold">
+            <i data-lucide="plus-circle" class="w-5 h-5 text-black"></i>
+          </div>
+          <h2 class="text-xl font-bold text-white font-heading">Agregar Nuevo Proyecto / Archivo</h2>
+        </div>
+        <span class="text-xs bg-brand-violet/20 text-brand-neonViolet px-3 py-1 rounded-full border border-brand-violet/40">Panel Propietario</span>
+      </div>
+
+      <form id="add-project-form" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Title -->
+          <div>
+            <label class="block text-xs font-semibold uppercase text-gray-300 mb-1">Título del Proyecto *</label>
+            <input type="text" id="project-title" required placeholder="Ej: Presentación Corporativa" 
+              class="w-full bg-black/60 border border-gray-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors">
+          </div>
+
+          <!-- Type -->
+          <div>
+            <label class="block text-xs font-semibold uppercase text-gray-300 mb-1">Tipo de Archivo / Contenido *</label>
+            <select id="project-type" required class="w-full bg-black/60 border border-gray-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors">
+              <option value="image">Imagen (JPG, PNG, WebP)</option>
+              <option value="video">Video (MP4, YouTube Embed, Vimeo)</option>
+              <option value="document">Documento (PDF, Docx, Archivo)</option>
+              <option value="text">Texto / Artículo / Nota</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- URL or Content Text -->
+        <div>
+          <label id="project-url-label" class="block text-xs font-semibold uppercase text-gray-300 mb-1">Enlace / URL de Recurso (o archivo cargado) *</label>
+          <input type="url" id="project-url" required placeholder="https://ejemplo.com/archivo.jpg o https://youtube.com/embed/..." 
+            class="w-full bg-black/60 border border-gray-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors">
+          <p class="text-[11px] text-gray-400 mt-1">Puedes ingresar la URL directa de la imagen, video de YouTube, PDF público o recurso en línea.</p>
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label class="block text-xs font-semibold uppercase text-gray-300 mb-1">Descripción o Contenido Detallado</label>
+          <textarea id="project-desc" rows="3" placeholder="Describe brevemente este proyecto o archivo..." 
+            class="w-full bg-black/60 border border-gray-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-end">
+          <button type="submit" class="flex items-center space-x-2 bg-gradient-to-r from-brand-gold to-brand-yellow text-black font-bold px-6 py-3 rounded-xl hover:shadow-gold-glow transition-all duration-300 transform active:scale-95">
+            <i data-lucide="upload" class="w-4 h-4"></i>
+            <span>Publicar Contenido</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Filter & Main Content Grid -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-8 flex-1">
+    <!-- Filter Bar -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-8 pb-4 border-b border-gray-800">
+      <div class="flex items-center space-x-2 overflow-x-auto py-1">
+        <button data-filter="all" class="filter-btn active-filter px-4 py-2 rounded-xl text-xs font-bold transition-all border border-brand-gold bg-brand-gold text-black">Todos</button>
+        <button data-filter="image" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all border border-gray-800 bg-brand-card text-gray-300 hover:border-brand-gold">Imágenes</button>
+        <button data-filter="video" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all border border-gray-800 bg-brand-card text-gray-300 hover:border-brand-gold">Videos</button>
+        <button data-filter="document" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all border border-gray-800 bg-brand-card text-gray-300 hover:border-brand-gold">Documentos</button>
+        <button data-filter="text" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all border border-gray-800 bg-brand-card text-gray-300 hover:border-brand-gold">Textos</button>
+      </div>
+      <div class="text-xs text-gray-400">
+        Mostrando <span id="visible-count" class="text-white font-bold">0</span> elementos
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="hidden text-center py-16 bg-brand-card/40 rounded-3xl border border-dashed border-gray-800">
+      <i data-lucide="folder-open" class="w-12 h-12 text-gray-600 mx-auto mb-3"></i>
+      <h3 class="text-lg font-bold text-gray-300">No hay archivos en esta categoría</h3>
+      <p class="text-xs text-gray-500 mt-1">Inicia sesión como administrador para agregar los primeros proyectos.</p>
+    </div>
+
+    <!-- Projects Grid Container -->
+    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Cards will be populated dynamically -->
+    </div>
+  </main>
+
+  <!-- Interactive Rating Section -->
+  <section class="bg-gradient-to-b from-brand-black to-black border-t border-brand-gold/20 py-16 px-4 sm:px-6 lg:px-8 w-full mt-12">
+    <div class="max-w-3xl mx-auto text-center space-y-6">
+      <div class="w-12 h-12 rounded-2xl bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center mx-auto text-brand-gold">
+        <i data-lucide="award" class="w-6 h-6"></i>
+      </div>
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white font-heading">¿Qué opinas de mi portafolio?</h2>
+        <p class="text-sm text-gray-400 mt-2">Tu calificación es muy importante para seguir mejorando. ¡Déjame tu valoración!</p>
+      </div>
+
+      <!-- Interactive Stars Container -->
+      <div class="bg-brand-card border border-gray-800 rounded-3xl p-8 max-w-xl mx-auto shadow-2xl space-y-4">
+        
+        <!-- Google Login Prompt for Voting -->
+        <div id="voting-auth-container" class="mb-4 pb-4 border-b border-gray-800">
+          <p id="voting-status-msg" class="text-xs text-gray-400 mb-3">Debes iniciar sesión con tu cuenta de Google para poder calificar.</p>
+          <button id="google-signin-btn" class="inline-flex items-center space-x-2 bg-white text-black font-semibold text-xs px-5 py-2.5 rounded-xl hover:bg-gray-200 transition-all shadow-md">
+            <svg class="w-4 h-4" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+              <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.29v3.14C3.26 21.3 7.35 24 12 24z"/>
+              <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.59H1.29C.47 8.22 0 10.05 0 12s.47 3.78 1.29 5.41l3.99-3.14z"/>
+              <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.94 1.19 15.23 0 12 0 7.35 0 3.26 2.7 1.29 6.59l3.99 3.14c.95-2.83 3.6-4.98 6.72-4.98z"/>
+            </svg>
+            <span>Iniciar sesión con Google</span>
+          </button>
+        </div>
+
+        <div id="star-rating-container" class="flex justify-center items-center space-x-2 sm:space-x-3 opacity-50 pointer-events-none transition-opacity">
+          <button data-rating="1" class="star-btn transition-transform hover:scale-125 focus:outline-none">
+            <i data-lucide="star" class="w-8 h-8 sm:w-10 sm:h-10 text-gray-600 transition-colors"></i>
+          </button>
+          <button data-rating="2" class="star-btn transition-transform hover:scale-125 focus:outline-none">
+            <i data-lucide="star" class="w-8 h-8 sm:w-10 sm:h-10 text-gray-600 transition-colors"></i>
+          </button>
+          <button data-rating="3" class="star-btn transition-transform hover:scale-125 focus:outline-none">
+            <i data-lucide="star" class="w-8 h-8 sm:w-10 sm:h-10 text-gray-600 transition-colors"></i>
+          </button>
+          <button data-rating="4" class="star-btn transition-transform hover:scale-125 focus:outline-none">
+            <i data-lucide="star" class="w-8 h-8 sm:w-10 sm:h-10 text-gray-600 transition-colors"></i>
+          </button>
+          <button data-rating="5" class="star-btn transition-transform hover:scale-125 focus:outline-none">
+            <i data-lucide="star" class="w-8 h-8 sm:w-10 sm:h-10 text-gray-600 transition-colors"></i>
+          </button>
+        </div>
+
+        <!-- Rating Feedback Text -->
+        <p id="rating-feedback-text" class="text-xs font-semibold text-brand-gold h-4">Haz clic para calificar</p>
+
+        <!-- Rating Stats Footer -->
+        <div class="pt-4 border-t border-gray-800/80 flex items-center justify-between text-xs text-gray-400 px-4">
+          <div>
+            Promedio: <span id="section-avg-rating" class="text-brand-yellow font-bold text-sm">0.0</span> / 5
+          </div>
+          <div>
+            Votos Totales: <span id="section-total-votes" class="text-white font-bold text-sm">0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black border-t border-gray-900 py-8 px-4 text-center text-xs text-gray-500">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p>© <span id="year"></span> Portafolio Personal. Todos los derechos reservados.</p>
+      <div class="flex items-center space-x-2 text-gray-400">
+        <span>Diseñado con tonos</span>
+        <span class="w-2.5 h-2.5 rounded-full bg-brand-gold inline-block"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-brand-yellow inline-block"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-white inline-block"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-brand-violet inline-block"></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/573213754963?text=Hola,%20me%20gustaría%20obtener%20más%20información%20sobre%20tus%20servicios%20y%20proyectos." 
+     target="_blank" 
+     rel="noopener noreferrer" 
+     aria-label="Contactar por WhatsApp"
+     class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-emerald-500 text-white rounded-full shadow-2xl hover:bg-emerald-400 hover:scale-110 active:scale-95 transition-all duration-300 group">
+    <!-- Pulse Effect -->
+    <span class="absolute -inset-1 rounded-full bg-emerald-500 opacity-40 animate-ping group-hover:opacity-75"></span>
+    <!-- WhatsApp Icon SVG -->
+    <svg class="w-7 h-7 fill-current relative z-10" viewBox="0 0 24 24">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+    </svg>
+  </a>
+
+  <!-- Admin Password Auth Modal -->
+  <div id="auth-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden px-4">
+    <div class="bg-brand-card border border-brand-gold/40 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-gold-glow relative">
+      <button id="close-modal-btn" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="text-center space-y-2 mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-brand-gold/10 border border-brand-gold/30 flex items-center justify-center mx-auto text-brand-gold">
+          <i data-lucide="shield-check" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-xl font-bold text-white font-heading">Acceso Administrador</h3>
+        <p class="text-xs text-gray-400">Ingresa la contraseña maestra para modificar y publicar archivos en el sitio web.</p>
+      </div>
+
+      <form id="admin-login-form" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold uppercase text-gray-300 mb-1">Contraseña Admin</label>
+          <input type="password" id="admin-password" required placeholder="••••••••" 
+            class="w-full bg-black border border-gray-700 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-brand-gold transition-colors">
+          
+          <!-- Password Lock & Attempts Status -->
+          <div id="login-lock-container" class="mt-2 text-xs">
+            <p id="auth-error" class="text-red-400 hidden">Contraseña incorrecta. Intenta de nuevo.</p>
+            <p id="attempts-left-text" class="text-gray-400 hidden mt-1">Intentos fallidos: <span id="attempts-count" class="text-brand-yellow font-bold">0</span>/3</p>
+            <div id="lockout-timer" class="hidden bg-red-500/10 border border-red-500/30 text-red-400 p-2.5 rounded-xl text-center font-mono font-bold mt-2">
+              Acceso bloqueado. Intenta de nuevo en: <span id="timer-seconds">60</span>s
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" id="admin-submit-btn" class="w-full bg-gradient-to-r from-brand-gold via-brand-yellow to-brand-gold text-black font-bold py-3 rounded-xl hover:shadow-gold-glow transition-all duration-300">
+          Iniciar Sesión
+        </button>
+      </form>
+
+      <div class="mt-4 pt-4 border-t border-gray-800 text-center">
+        <p class="text-[11px] text-gray-500">
+          Nota: La contraseña por defecto es <span class="text-brand-gold font-mono font-bold">admin123</span> (o autenticada mediante Firebase Auth).
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Application Logic & Firebase Client Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { 
+      getAuth, 
+      signInAnonymously, 
+      signInWithCustomToken, 
+      signInWithPopup,
+      GoogleAuthProvider,
+      signOut,
+      onAuthStateChanged 
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { 
+      getFirestore, 
+      doc, 
+      getDoc, 
+      setDoc, 
+      updateDoc, 
+      collection, 
+      onSnapshot, 
+      addDoc, 
+      deleteDoc 
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Application ID Configuration
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'portfolio-app-default';
+
+    // Firebase fallback config or environment config
+    const firebaseConfig = typeof __firebase_config !== 'undefined' 
+      ? JSON.parse(__firebase_config) 
+      : {
+          apiKey: "demo-api-key",
+          authDomain: "demo-app.firebaseapp.com",
+          projectId: "demo-app",
+          storageBucket: "demo-app.appspot.com",
+          messagingSenderId: "123456789",
+          appId: "1:123456789:web:demo"
+        };
+
+    // Firebase Initialization
+    let app, db, auth;
+    let isFirebaseActive = false;
+    let googleUser = null;
+    let userVoted = false;
+
+    // Admin Lockout State
+    let failedAttempts = 0;
+    let isLockedOut = false;
+    let lockoutCountdown = 60;
+    let timerInterval = null;
+
+    try {
+      app = initializeApp(firebaseConfig);
+      db = getFirestore(app);
+      auth = getAuth(app);
+      isFirebaseActive = true;
+    } catch (e) {
+      console.warn("Firebase operando en modo local reactivo de memoria:", e);
+    }
+
+    // State Variables
+    let isAdmin = false;
+    let currentFilter = 'all';
+    let projectsData = [];
+    let ratingData = { totalVotes: 0, sumStars: 0, average: 0, votedUids: [] };
+
+    // Initial Local Sample Data
+    const initialProjects = [
+      {
+        id: 'p1',
+        title: 'Diseño UX/UI Portafolio Oscuro',
+        type: 'image',
+        url: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
+        description: 'Interfaz gráfica con estética moderna en colores negro y dorado.',
+        createdAt: Date.now()
+      },
+      {
+        id: 'p2',
+        title: 'Video Demo de Proyectos',
+        type: 'video',
+        url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
+        description: 'Muestra audiovisual de los principales avances técnicos.',
+        createdAt: Date.now() - 10000
+      },
+      {
+        id: 'p3',
+        title: 'Especificaciones Técnicas PDF',
+        type: 'document',
+        url: 'https://www.w3.org/W3C/History/19920122-hypertext/hypertext/WWW/TheProject.html',
+        description: 'Documentación oficial sobre la estructura y componentes creados.',
+        createdAt: Date.now() - 20000
+      }
+    ];
+
+    // Local Storage Helper
+    function loadLocalState() {
+      const storedProjects = localStorage.getItem('app_projects');
+      const storedRating = localStorage.getItem('app_ratings');
+      
+      projectsData = storedProjects ? JSON.parse(storedProjects) : initialProjects;
+      ratingData = storedRating ? JSON.parse(storedRating) : { totalVotes: 5, sumStars: 24, average: 4.8, votedUids: [] };
+    }
+
+    function saveLocalProjects() {
+      localStorage.setItem('app_projects', JSON.stringify(projectsData));
+    }
+
+    function saveLocalRatings() {
+      localStorage.setItem('app_ratings', JSON.stringify(ratingData));
+    }
+
+    // Initialize Auth & Realtime Sync
+    async function initApp() {
+      document.getElementById('year').textContent = new Date().getFullYear();
+      loadLocalState();
+
+      if (isFirebaseActive && auth) {
+        try {
+          if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+            await signInWithCustomToken(auth, __initial_auth_token);
+          } else {
+            await signInAnonymously(auth);
+          }
+
+          // Monitor Auth state for Google Sign-In
+          onAuthStateChanged(auth, (user) => {
+            if (user && !user.isAnonymous) {
+              googleUser = user;
+              updateGoogleUserUI();
+            } else {
+              googleUser = null;
+              updateGoogleUserUI();
+            }
+          });
+
+          // Subscribe to Realtime Firestore Collections (RULE 1)
+          const projectsColl = collection(db, 'artifacts', appId, 'public', 'data', 'projects');
+          onSnapshot(projectsColl, (snapshot) => {
+            const fbProjects = [];
+            snapshot.forEach((docSnap) => {
+              fbProjects.push({ id: docSnap.id, ...docSnap.data() });
+            });
+            projectsData = fbProjects.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+            renderProjects();
+            updateCounters();
+          }, (err) => console.error("Error en Snapshot de Proyectos:", err));
+
+          // Realtime Rating Snapshot
+          const ratingDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'ratings', 'summary');
+          onSnapshot(ratingDocRef, (docSnap) => {
+            if (docSnap.exists()) {
+              ratingData = docSnap.data();
+              if (!ratingData.votedUids) ratingData.votedUids = [];
+              updateRatingUI();
+              updateCounters();
+            }
+          }, (err) => console.error("Error en Snapshot Votos:", err));
+
+        } catch (err) {
+          console.warn("Fallo autenticación Firebase, usando modo offline:", err);
+        }
+      }
+
+      renderProjects();
+      updateCounters();
+      updateRatingUI();
+      setupEventListeners();
+      lucide.createIcons();
+    }
+
+    // Google Auth Profile UI Update
+    function updateGoogleUserUI() {
+      const userBadge = document.getElementById('google-user-badge');
+      const avatar = document.getElementById('google-user-avatar');
+      const name = document.getElementById('google-user-name');
+      const votingAuthContainer = document.getElementById('voting-auth-container');
+      const starContainer = document.getElementById('star-rating-container');
+      const statusMsg = document.getElementById('voting-status-msg');
+
+      if (googleUser) {
+        userBadge.classList.remove('hidden');
+        userBadge.classList.add('flex');
+        avatar.src = googleUser.photoURL || 'https://placehold.co/100x100/D4AF37/000000?text=U';
+        name.textContent = googleUser.displayName || googleUser.email || 'Usuario';
+
+        // Check if user already voted
+        const uid = googleUser.uid;
+        userVoted = Array.isArray(ratingData.votedUids) && ratingData.votedUids.includes(uid);
+
+        if (userVoted) {
+          statusMsg.textContent = "✓ Ya has calificado este portafolio con tu cuenta.";
+          statusMsg.className = "text-xs text-brand-gold font-bold mb-1";
+          document.getElementById('google-signin-btn').classList.add('hidden');
+          starContainer.classList.add('opacity-50', 'pointer-events-none');
+        } else {
+          statusMsg.textContent = "¡Sesión iniciada! Haz clic en las estrellas para registrar tu voto.";
+          statusMsg.className = "text-xs text-emerald-400 font-semibold mb-1";
+          document.getElementById('google-signin-btn').classList.add('hidden');
+          starContainer.classList.remove('opacity-50', 'pointer-events-none');
+        }
+      } else {
+        userBadge.classList.add('hidden');
+        userBadge.classList.remove('flex');
+        document.getElementById('google-signin-btn').classList.remove('hidden');
+        statusMsg.textContent = "Debes iniciar sesión con tu cuenta de Google para poder calificar.";
+        statusMsg.className = "text-xs text-gray-400 mb-3";
+        starContainer.classList.add('opacity-50', 'pointer-events-none');
+      }
+    }
+
+    // Attach Event Handlers to Delete Buttons (RULE 1 & Instant State Sync)
+    function attachDeleteEvents() {
+      document.querySelectorAll('.delete-btn').forEach(btn => {
+        btn.onclick = async (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const pId = btn.getAttribute('data-id');
+
+          if (!confirm('¿Estás seguro de que deseas eliminar este archivo/proyecto de la página?')) return;
+
+          // 1. Instant local state removal
+          projectsData = projectsData.filter(p => p.id !== pId);
+          saveLocalProjects();
+          renderProjects();
+          updateCounters();
+
+          // 2. Sync deletion with Firestore if active
+          if (isFirebaseActive && auth?.currentUser) {
+            try {
+              const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'projects', pId);
+              await deleteDoc(docRef);
+            } catch (err) {
+              console.error("Error eliminando documento de Firestore:", err);
+            }
+          }
+        };
+      });
+    }
+
+    // Render Projects Grid
+    function renderProjects() {
+      const grid = document.getElementById('projects-grid');
+      const emptyState = document.getElementById('empty-state');
+      grid.innerHTML = '';
+
+      const filtered = projectsData.filter(p => currentFilter === 'all' || p.type === currentFilter);
+      document.getElementById('visible-count').textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        emptyState.classList.remove('hidden');
+        return;
+      } else {
+        emptyState.classList.add('hidden');
+      }
+
+      filtered.forEach((project) => {
+        const card = document.createElement('div');
+        card.className = 'bg-brand-card border border-gray-800 hover:border-brand-gold/40 rounded-2xl overflow-hidden transition-all duration-300 flex flex-col group relative shadow-lg';
+
+        let mediaHtml = '';
+        const badgeColor = {
+          image: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+          video: 'bg-red-500/20 text-red-400 border-red-500/30',
+          document: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',
+          text: 'bg-brand-violet/20 text-brand-neonViolet border-brand-violet/30'
+        }[project.type] || 'bg-gray-500/20 text-gray-300';
+
+        if (project.type === 'image') {
+          mediaHtml = `
+            <div class="h-48 w-full bg-black overflow-hidden relative">
+              <img src="${project.url}" alt="${project.title}" 
+                onerror="this.src='https://placehold.co/600x400/121217/D4AF37?text=Imagen+no+disponible'" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+          `;
+        } else if (project.type === 'video') {
+          if (project.url.includes('youtube.com') || project.url.includes('youtu.be')) {
+            const embedUrl = project.url.replace('watch?v=', 'embed/');
+            mediaHtml = `
+              <div class="h-48 w-full bg-black relative">
+                <iframe src="${embedUrl}" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+              </div>
+            `;
+          } else {
+            mediaHtml = `
+              <div class="h-48 w-full bg-black flex items-center justify-center p-4">
+                <video src="${project.url}" controls class="max-h-full max-w-full rounded-lg"></video>
+              </div>
+            `;
+          }
+        } else if (project.type === 'document') {
+          mediaHtml = `
+            <div class="h-48 w-full bg-gradient-to-br from-brand-card to-black p-6 flex flex-col items-center justify-center text-center border-b border-gray-800">
+              <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-2">
+                <i data-lucide="file-text" class="w-7 h-7"></i>
+              </div>
+              <span class="text-xs text-gray-400 truncate max-w-full font-mono">PDF / Documento</span>
+            </div>
+          `;
+        } else {
+          mediaHtml = `
+            <div class="h-48 w-full bg-gradient-to-br from-brand-card to-black p-6 flex flex-col items-center justify-center text-center border-b border-gray-800">
+              <div class="w-14 h-14 rounded-2xl bg-brand-violet/10 border border-brand-violet/30 flex items-center justify-center text-brand-neonViolet mb-2">
+                <i data-lucide="align-left" class="w-7 h-7"></i>
+              </div>
+              <span class="text-xs text-gray-400 uppercase tracking-widest font-semibold">Publicación de Texto</span>
+            </div>
+          `;
+        }
+
+        const deleteBtnHtml = isAdmin ? `
+          <button data-id="${project.id}" title="Eliminar proyecto" class="delete-btn absolute top-3 right-3 z-30 bg-red-600/90 hover:bg-red-500 text-white p-2 rounded-xl backdrop-blur-md shadow-lg transition-transform hover:scale-110 active:scale-95 cursor-pointer">
+            <i data-lucide="trash-2" class="w-4 h-4"></i>
+          </button>
+        ` : '';
+
+        card.innerHTML = `
+          ${deleteBtnHtml}
+          ${mediaHtml}
+          <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border ${badgeColor}">
+                  ${project.type}
+                </span>
+              </div>
+              <h3 class="text-base font-bold text-white font-heading group-hover:text-brand-gold transition-colors line-clamp-1">
+                ${project.title}
+              </h3>
+              <p class="text-xs text-gray-400 mt-2 line-clamp-3 leading-relaxed">
+                ${project.description || 'Sin descripción disponible.'}
+              </p>
+            </div>
+
+            <div class="pt-3 border-t border-gray-800 flex items-center justify-between">
+              <a href="${project.url}" target="_blank" rel="noopener" class="inline-flex items-center space-x-1.5 text-xs font-semibold text-brand-gold hover:text-brand-yellow transition-colors">
+                <span>Ver / Abrir Archivo</span>
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+
+      lucide.createIcons();
+      attachDeleteEvents();
+    }
+
+    // Dynamic Counter Updater
+    function updateCounters() {
+      document.getElementById('counter-projects').textContent = projectsData.length;
+      document.getElementById('counter-total-votes').textContent = ratingData.totalVotes || 0;
+      
+      const avg = ratingData.totalVotes > 0 ? (ratingData.sumStars / ratingData.totalVotes).toFixed(1) : "0.0";
+      document.getElementById('counter-avg-rating').textContent = avg;
+      document.getElementById('section-avg-rating').textContent = avg;
+      document.getElementById('section-total-votes').textContent = ratingData.totalVotes || 0;
+    }
+
+    // Update Interactive Star UI
+    function updateRatingUI(userRating = 0) {
+      const buttons = document.querySelectorAll('.star-btn');
+      buttons.forEach((btn) => {
+        const ratingVal = parseInt(btn.getAttribute('data-rating'));
+        const icon = btn.querySelector('svg');
+        
+        if (ratingVal <= userRating) {
+          icon.classList.remove('text-gray-600');
+          icon.classList.add('text-brand-yellow', 'fill-brand-yellow');
+        } else {
+          icon.classList.remove('text-brand-yellow', 'fill-brand-yellow');
+          icon.classList.add('text-gray-600');
+        }
+      });
+    }
+
+    // Star Rating Event Logic with Unique Google Auth Verification
+    async function submitRating(stars) {
+      if (!googleUser) {
+        alert("Debes iniciar sesión con Google para calificar.");
+        return;
+      }
+
+      const uid = googleUser.uid;
+      if (!ratingData.votedUids) ratingData.votedUids = [];
+
+      if (ratingData.votedUids.includes(uid)) {
+        alert("Esta cuenta de Google ya ha registrado su calificación previa.");
+        return;
+      }
+
+      ratingData.votedUids.push(uid);
+      ratingData.totalVotes = (ratingData.totalVotes || 0) + 1;
+      ratingData.sumStars = (ratingData.sumStars || 0) + stars;
+      ratingData.average = parseFloat((ratingData.sumStars / ratingData.totalVotes).toFixed(1));
+
+      if (isFirebaseActive && auth?.currentUser) {
+        try {
+          const ratingDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'ratings', 'summary');
+          await setDoc(ratingDocRef, ratingData);
+        } catch (err) {
+          console.error("Error actualizando valoración en Firestore:", err);
+        }
+      }
+
+      saveLocalRatings();
+      updateRatingUI(stars);
+      updateCounters();
+      updateGoogleUserUI();
+
+      const feedback = document.getElementById('rating-feedback-text');
+      feedback.textContent = `¡Gracias por votar con ${stars} estrella(s)!`;
+      feedback.className = 'text-xs font-semibold text-brand-yellow animate-pulse h-4';
+    }
+
+    // Admin Lockout Logic (3 Incorrect Password Attempts = 60 Seconds Lock)
+    function triggerLockout() {
+      isLockedOut = true;
+      lockoutCountdown = 60;
+
+      const passwordInput = document.getElementById('admin-password');
+      const submitBtn = document.getElementById('admin-submit-btn');
+      const lockTimerBox = document.getElementById('lockout-timer');
+      const timerSpan = document.getElementById('timer-seconds');
+
+      passwordInput.disabled = true;
+      submitBtn.disabled = true;
+      passwordInput.classList.add('opacity-50', 'cursor-not-allowed');
+      submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      lockTimerBox.classList.remove('hidden');
+
+      timerInterval = setInterval(() => {
+        lockoutCountdown--;
+        timerSpan.textContent = lockoutCountdown;
+
+        if (lockoutCountdown <= 0) {
+          clearInterval(timerInterval);
+          isLockedOut = false;
+          failedAttempts = 0;
+          passwordInput.disabled = false;
+          submitBtn.disabled = false;
+          passwordInput.classList.remove('opacity-50', 'cursor-not-allowed');
+          submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+          lockTimerBox.classList.add('hidden');
+          document.getElementById('attempts-left-text').classList.add('hidden');
+          document.getElementById('auth-error').classList.add('hidden');
+        }
+      }, 1000);
+    }
+
+    // Setup All Event Listeners
+    function setupEventListeners() {
+      // Filter Buttons
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.filter-btn').forEach(b => {
+            b.className = 'filter-btn px-4 py-2 rounded-xl text-xs font-bold transition-all border border-gray-800 bg-brand-card text-gray-300 hover:border-brand-gold';
+          });
+          btn.className = 'filter-btn active-filter px-4 py-2 rounded-xl text-xs font-bold transition-all border border-brand-gold bg-brand-gold text-black';
+          currentFilter = btn.getAttribute('data-filter');
+          renderProjects();
+        });
+      });
+
+      // Google Login Button Action
+      document.getElementById('google-signin-btn').addEventListener('click', async () => {
+        if (!isFirebaseActive || !auth) {
+          // Fallback mock sign-in for preview environment
+          googleUser = {
+            uid: 'demo-google-uid-' + Date.now(),
+            displayName: 'Usuario Google Demo',
+            photoURL: 'https://placehold.co/100x100/D4AF37/000000?text=G'
+          };
+          updateGoogleUserUI();
+          return;
+        }
+
+        try {
+          const provider = new GoogleAuthProvider();
+          const result = await signInWithPopup(auth, provider);
+          googleUser = result.user;
+          updateGoogleUserUI();
+        } catch (error) {
+          console.error("Error al iniciar sesión con Google:", error);
+          alert("No se pudo completar el inicio de sesión con Google.");
+        }
+      });
+
+      // Google Logout Button Action
+      document.getElementById('google-logout-btn').addEventListener('click', async () => {
+        if (isFirebaseActive && auth) {
+          await signOut(auth);
+        }
+        googleUser = null;
+        updateGoogleUserUI();
+      });
+
+      // Admin Login Modal Toggle
+      const authBtn = document.getElementById('auth-btn');
+      const modal = document.getElementById('auth-modal');
+      const closeModalBtn = document.getElementById('close-modal-btn');
+      const adminForm = document.getElementById('admin-login-form');
+      const authError = document.getElementById('auth-error');
+
+      authBtn.addEventListener('click', () => {
+        if (isAdmin) {
+          isAdmin = false;
+          document.getElementById('admin-badge').classList.add('hidden');
+          document.getElementById('admin-panel').classList.add('hidden');
+          document.getElementById('auth-btn-text').textContent = 'Admin Login';
+          renderProjects();
+        } else {
+          modal.classList.remove('hidden');
+        }
+      });
+
+      closeModalBtn.addEventListener('click', () => modal.classList.add('hidden'));
+
+      // Admin Form Submit with Password Attempt Counter & Lockout
+      adminForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (isLockedOut) return;
+
+        const pass = document.getElementById('admin-password').value;
+        if (pass === 'admin123') { 
+          isAdmin = true;
+          failedAttempts = 0;
+          modal.classList.add('hidden');
+          authError.classList.add('hidden');
+          document.getElementById('attempts-left-text').classList.add('hidden');
+          document.getElementById('admin-password').value = '';
+          
+          document.getElementById('admin-badge').classList.remove('hidden');
+          document.getElementById('admin-badge').classList.add('flex');
+          document.getElementById('admin-panel').classList.remove('hidden');
+          document.getElementById('auth-btn-text').textContent = 'Cerrar Admin';
+          renderProjects();
+        } else {
+          failedAttempts++;
+          authError.classList.remove('hidden');
+          document.getElementById('attempts-left-text').classList.remove('hidden');
+          document.getElementById('attempts-count').textContent = failedAttempts;
+
+          if (failedAttempts >= 3) {
+            triggerLockout();
+          }
+        }
+      });
+
+      // Form Submission to Add New Project
+      const addForm = document.getElementById('add-project-form');
+      addForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!isAdmin) return;
+
+        const title = document.getElementById('project-title').value;
+        const type = document.getElementById('project-type').value;
+        const url = document.getElementById('project-url').value;
+        const description = document.getElementById('project-desc').value;
+
+        const newProject = {
+          id: 'p_' + Date.now(),
+          title,
+          type,
+          url,
+          description,
+          createdAt: Date.now()
+        };
+
+        if (isFirebaseActive && auth?.currentUser) {
+          try {
+            const projectsColl = collection(db, 'artifacts', appId, 'public', 'data', 'projects');
+            await addDoc(projectsColl, newProject);
+          } catch (err) {
+            console.error("Error al guardar en Firestore:", err);
+          }
+        }
+
+        projectsData.unshift(newProject);
+        saveLocalProjects();
+        renderProjects();
+        updateCounters();
+
+        addForm.reset();
+        alert('¡Proyecto o archivo cargado exitosamente!');
+      });
+
+      // Star Hover & Click Interactions
+      const starBtns = document.querySelectorAll('.star-btn');
+      starBtns.forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+          if (!googleUser || userVoted) return;
+          const ratingVal = parseInt(btn.getAttribute('data-rating'));
+          updateRatingUI(ratingVal);
+        });
+
+        btn.addEventListener('click', () => {
+          const ratingVal = parseInt(btn.getAttribute('data-rating'));
+          submitRating(ratingVal);
+        });
+      });
+
+      document.getElementById('star-rating-container').addEventListener('mouseleave', () => {
+        if (userVoted) return;
+        updateRatingUI(0);
+      });
+    }
+
+    window.onload = initApp;
+  </script>
+</body>
+</html>
